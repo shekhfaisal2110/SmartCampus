@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCampus-Blog</title>
+    <link rel="stylesheet" href="./css/style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="./css/respons.css">
+    <link rel="shortcut icon" href="./icons/logo.jpg" type="image/x-icon">
+    <style>
+    
+/* Back Button Styles */
+.back-button {
+          background-color: #007bff; 
+          color: white; 
+          border: none; 
+          border-radius: 5px; 
+          padding: 10px 15px; 
+          font-size: 16px; 
+          cursor: pointer; 
+          width: 20vw;
+          transition: background-color 0.3s ease, transform 0.2s ease; 
+          display: block; 
+          margin: 20px auto; 
+        }
+
+        .back-button:hover {
+          background-color: #0056b3; 
+          transform: scale(1.05); 
+        }
+
+        .back-button:focus {
+          outline: none; 
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+        }
+    </style>
+</head>
+<body>
+
+  <h2 class="blog-heading">Learn from Our Blog</h2>
+  <section class="blog-section" id="blog">
+    <div class="categories-filter">
+      <label for="category-select">Filter by Category:</label>
+      <select id="category-select" class="category-select">
+        <option value="all">All</option>
+        <option value="learning-tips">Learning Tips</option>
+        <option value="industry-news">Industry News</option>
+      </select>
+    </div>
+
+    <section class="articles-grid">
+        <div class="article-card" data-category="learning-tips">
+            <img src="./img/ManagementStrategies.jpeg" alt="Effective Time Management Strategies for Students" class="article-image">
+            <h3 class="article-title">Effective Time Management Strategies for Students</h3>
+            <p class="article-description">Learn how to manage your time effectively and stay on track with your studies.</p>
+        </div>
+        <div class="article-card" data-category="industry-news">
+            <img src="./img/EducationalTechnology.jpeg" alt="What’s New in Educational Technology?" class="article-image">
+            <h3 class="article-title">What’s New in Educational Technology?</h3>
+            <p class="article-description">Stay up-to-date with the latest developments in the world of educational technology.</p>
+        </div>
+        <div class="article-card" data-category="learning-tips">
+            <img src="./img/InteractiveLearning.jpeg" alt="The Benefits of Interactive Learning" class="article-image">
+            <h3 class="article-title">The Benefits of Interactive Learning</h3>
+            <p class="article-description">Learn how interactive learning can enhance student engagement and retention of knowledge.</p>
+        </div>
+        <div class="article-card" data-category="study-tips">
+            <img src="./img/AcademicSuccess.jpg" alt="Top Study Techniques for Academic Success" class="article-image">
+            <h3 class="article-title">Top Study Techniques for Academic Success</h3>
+            <p class="article-description">Discover effective study techniques that can help you achieve academic excellence.</p>
+        </div>
+        <div class="article-card" data-category="career-advice">
+            <img src="./img/CareerPlanning.jpg" alt="Career Planning: Steps to Success" class="article-image">
+            <h3 class="article-title">Career Planning: Steps to Success</h3>
+            <p class="article-description">Learn how to plan your career path and make informed decisions for your future.</p>
+        </div>
+        <div class="article-card" data-category="learning-tips">
+            <img src="./img/MemoryTechniques.jpg" alt="Memory Techniques for Better Retention" class="article-image">
+            <h3 class="article-title">Memory Techniques for Better Retention</h3>
+            <p class="article-description">Explore memory techniques that can help improve your retention and recall abilities.</p>
+        </div>
+        <div class="article-card" data-category="industry-news">
+            <img src="./img/OnlineLearning.jpeg" alt="Trends in Online Learning" class="article-image">
+            <h3 class="article-title">Trends in Online Learning</h3>
+            <p class="article-description">Stay informed about the latest trends shaping the future of online education.</p>
+        </div>
+        <div class="article-card" data-category="study-tips">
+            <img src="./img/ExamPreparation.jpg" alt="Effective Exam Preparation Strategies" class="article-image">
+            <h3 class="article-title">Effective Exam Preparation Strategies</h3>
+            <p class="article-description">Learn how to prepare effectively for exams and boost your confidence.</p>
+        </div>
+        <div class="article-card" data-category="career-advice">
+            <img src="./img/CareerGrowth.jpg" alt="Networking Skills for Career Growth" class="article-image">
+            <h3 class="article-title">Networking Skills for Career Growth</h3>
+            <p class="article-description">Understand the importance of networking and how to build valuable connections.</p>
+        </div>
+        <div class="article-card" data-category="learning-tips">
+            <img src="./img/GoalSetting.jpg" alt="The Importance of Goal Setting" class="article-image">
+            <h3 class="article-title">The Importance of Goal Setting</h3>
+            <p class="article-description">Discover how setting goals can help you achieve your academic and personal aspirations.</p>
+        </div>
+    </section>
+    </section>
+    
+
+    <button class="back-button" onclick="goBack()">Back</button>
+    <script>
+        // JavaScript to filter blog posts based on category
+        const categorySelect = document.getElementById('category-select');
+        const articleCards = document.querySelectorAll('.article-card');
+
+        categorySelect.addEventListener('change', (event) => {
+          const selectedCategory = event.target.value;
+        
+          articleCards.forEach((card) => {
+            const cardCategory = card.getAttribute('data-category');
+            if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+
+        function goBack() {
+    window.location.href = "index.html"; 
+}
+    </script>
+</body>
+</html>

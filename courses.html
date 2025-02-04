@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCampus-Courses & Certificates</title>
+    
+    <link rel="stylesheet" href="./css/courser.css">
+    <link rel="stylesheet" href="./css/respons.css">
+    <link rel="shortcut icon" href="./icons/logo.jpg" type="image/x-icon">
+</head>
+<body>
+    <!-- Course/Service Offering Section -->
+    <section class="course-offering" id="courses">
+    <!-- Heading -->
+    <h2 class="course-heading">Explore Our Courses</h2>
+
+    <!-- Category Filters -->
+    <div class="category-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="programming">Programming</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+        <button class="filter-btn" data-filter="marketing">Marketing</button>
+        <button class="filter-btn" data-filter="business">Business</button>
+    </div>
+
+    <!-- Course Previews Grid -->
+    <div class="course-grid" id="courseGrid">
+        <!-- Programming Courses -->
+        <div class="course-card programming">
+            <img src="./img/WebDevelopmentBootcamp.jpg" alt="Course Image" class="course-image" id="courseImage">
+            <h3 class="course-title">Web Development Bootcamp</h3>
+            <p class="course-description">Learn to build websites from scratch using HTML, CSS, and JavaScript.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Web Development Bootcamp')">Enroll Now</button>
+        </div>
+        <div class="course-card programming">
+            <img src="./img/JavaScriptMaster.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">JavaScript Mastery</h3>
+            <p class="course-description">Master JavaScript and become a front-end web development expert.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('JavaScript Mastery')">Enroll Now</button>
+        </div>
+        <div class="course-card programming">
+            <img src="./img/PythonForBeginners.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Python for Beginners</h3>
+            <p class="course-description">Learn Python from scratch and start building your own applications.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Python for Beginners')">Enroll Now</button>
+        </div>
+        <div class="course-card programming">
+            <img src="./img/DataScienceWithPython.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Data Science with Python</h3>
+            <p class="course-description">Learn how to analyze and visualize data using Python and libraries like Pandas.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Data Science with Python')">Enroll Now</button>
+        </div>
+    
+        <!-- Design Courses -->
+        <div class="course-card design">
+            <img src="./img/GraphicDesignBasics.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Graphic Design Basics</h3>
+            <p class="course-description">Learn the fundamentals of graphic design and create stunning visuals.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Graphic Design Basics')">Enroll Now</button>
+        </div>
+        <div class="course-card design">
+            <img src="./img/UXUIDesign.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">UX/UI Design</h3>
+            <p class="course-description">Create user-centered designs with this UX/UI design course.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('UX/UI Design')">Enroll Now</button>
+        </div>
+        <div class="course-card design">
+            <img src="./img/AdobePhotoshopMastery.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Adobe Photoshop Mastery</h3>
+            <p class="course-description">Learn advanced Photoshop skills to design professional graphics.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Adobe Photoshop Mastery')">Enroll Now</button>
+        </div>
+        <div class="course-card design">
+            <img src="./img/IllustratorForBeginners.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Illustrator for Beginners</h3>
+            <p class="course-description">Get started with vector graphic design using Adobe Illustrator.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Illustrator for Beginners')">Enroll Now</button>
+        </div>
+    
+        <!-- Marketing Courses -->
+        <div class="course-card marketing">
+            <img src="./img/DigitalMarketingMasterclass.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Digital Marketing Masterclass</h3>
+            <p class="course-description">Master digital marketing strategies across social media, SEO, and paid ads.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Digital Marketing Masterclass')">Enroll Now</button>
+        </div>
+        <div class="course-card marketing">
+            <img src="./img/SocialMediaMarketing.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Social Media Marketing</h3>
+            <p class="course-description">Learn how to build and execute successful social media campaigns.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Social Media Marketing')">Enroll Now</button>
+        </div>
+        <div class="course-card marketing">
+            <img src="./img/SEOTraining.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">SEO Training</h3>
+            <p class="course-description">Learn SEO strategies to rank your website higher on search engines.</p>
+            <p class="course-price">₹799</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('SEO Training')">Enroll Now</button>
+        </div>
+        <div class="course-card marketing">
+            <img src="./img/EmailMarketingSuccess.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Email Marketing Success</h3>
+            <p class="course-description">Create successful email marketing campaigns that drive conversions.</p>
+            <p class="course-price">₹799</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Email Marketing Success')">Enroll Now</button>
+        </div>
+    
+        <!-- Business Courses -->
+        <div class="course-card business">
+            <img src="./img/Entrepreneurship101.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Entrepreneurship 101</h3>
+            <p class="course-description">Learn the basics of starting your own business and building a startup.</p>
+            <p class="course-price">₹799</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Entrepreneurship 101')">Enroll Now</button>
+        </div>
+        <div class="course-card business">
+            <img src="./img/ProjectManagementMastery.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Project Management Mastery</h3>
+            <p class="course-description">Gain essential skills for managing and executing successful projects.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Project Management Mastery')">Enroll Now</button>
+        </div>
+        <div class="course-card business">
+            <img src="./img/FinancialLiteracyForBeginners.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Financial Literacy for Beginners</h3>
+            <p class="course-description">Learn the fundamentals of personal finance and money management.</p>
+            <p class="course-price">₹799</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Financial Literacy for Beginners')">Enroll Now</button>
+        </div>
+        <div class="course-card business">
+            <img src="./img/LeadershipDevelopment.jpg" alt="Course Image" class="course-image">
+            <h3 class="course-title">Leadership Development</h3>
+            <p class="course-description">Enhance your leadership skills and grow as an effective leader.</p>
+            <p class="course-price">₹999</p>
+            <button class="cta-primary enroll-now" onclick="enrollCourse('Leadership Development')">Enroll Now</button>
+        </div>
+    </div>
+    </section>
+
+    <button class="cta-primary" onclick="showEnrolledCourses()" id="showEnrolledCourses">Show Enrolled Courses</button>
+
+    <button class="back-button" onclick="goBack()">Back</button>
+    
+<script>
+    // JavaScript for Filter functionality(Course/Service Offering Section)
+document.querySelectorAll('.filter-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      const filter = this.dataset.filter;
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+  
+      // Show or hide courses based on category filter
+      document.querySelectorAll('.course-card').forEach(card => {
+        if (filter === 'all' || card.classList.contains(filter)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+let completedTasks = 0; // Track the number of completed tasks
+const totalTasks = 5; // Set the total number of tasks required for a certificate
+const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || []; // Retrieve enrolled courses from local storage
+
+function enrollCourse(courseName) {
+    if (!enrolledCourses.includes(courseName)) {
+        enrolledCourses.push(courseName); // Add course to enrolled courses
+        completedTasks++; // Increment the completed tasks count
+        localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses)); // Store enrolled courses in local storage
+        alert("You have successfully enrolled in " + courseName + "!");
+    } else {
+        alert("You are already enrolled in " + courseName + ".");
+    }
+
+    // Check if the user has completed the required number of tasks
+    if (completedTasks >= totalTasks) {
+        showCertificate();
+    }
+}
+
+
+
+function showEnrolledCourses() {
+    window.location.href = 'enrolledCourses.html'; // Redirect to enrolled courses page
+}
+
+
+// Function to redirect to index.html
+function goBack() {
+    window.location.href = "index.html"; 
+}
+
+</script>
+</body>
+</html>

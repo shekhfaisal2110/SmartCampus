@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCampus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="./icons/logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/respons.css">
+    <link rel="stylesheet" href="./css/profile.css">
+
+    <script>
+      
+     // Function to check if user is logged in
+    function checkUserLogin() {
+        const user = JSON.parse(localStorage.getItem("loggedInUser"));
+        const authButtons = document.querySelector(".auth-buttons");
+        const userProfile = document.querySelector(".user-profile");
+    
+        if (user) {
+            // Hide auth buttons and show user profile
+            authButtons.style.display = "none";
+            userProfile.style.display = "block";
+            document.getElementById("user-name").textContent = user.name; // Assuming user object has a name property
+            document.getElementById("user-email").textContent = user.email; // Assuming user object has an email property
+
+            // Set the image source, using a default image if none is provided
+            const userImage = user.image || "./img/profile.png"; // Default image URL
+            document.getElementById("user-image").src = userImage; // Set the image source
+        } else {
+            // Show auth buttons
+            authButtons.style.display = "block";
+            userProfile.style.display = "none";
+        }
+    }
+
+    // Function to handle CTA button click
+    function handleCTAClick() {
+            const user = JSON.parse(localStorage.getItem("loggedInUser")); // Check if user is logged in
+    
+            if (user) {
+                // If user is logged in, show an alert or message
+                alert("You are already logged in as " + user.name + "."); // Display a message with the user's name
+            } else {
+                // If user is not logged in, redirect to signIn.html
+                window.location.href = "signIn.html"; // Redirect to sign-in page
+            }
+        }
+      
+      
+    // Function to change the profile image
+    function changeProfileImage(event) {
+        const file = event.target.files[0]; // Get the selected file
+        if (file) {
+            const reader = new FileReader(); // Create a FileReader to read the file
+            reader.onload = function(e) {
+                document.getElementById("user-image").src = e.target.result; // Set the image source to the selected file
+                // Optionally, you can also update the user object in local storage if needed
+                const user = JSON.parse(localStorage.getItem("loggedInUser"));
+                user.image = e.target.result; // Update the image property
+                localStorage.setItem("loggedInUser", JSON.stringify(user)); // Save updated user object
+            };
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
+    }
+
+          // Function to log out the user
+      function logout() {
+        localStorage.removeItem("loggedInUser");
+        checkUserLogin(); // Update UI after logout
+      }
+  
+      // Function to toggle user profile visibility
+      function toggleUserProfile() {
+          const profileDetails = document.getElementById("profile-details");
+          if (profileDetails.style.display === "none" || profileDetails.style.display === "") {
+              profileDetails.style.display = "block"; // Show profile details
+          } else {
+              profileDetails.style.display = "none"; // Hide profile details
+          }
+      }
+  
+      // Check user login status on page load
+      window.onload = checkUserLogin;
+
+      
+  </script>
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+    <div class="container">
+        <!-- Logo -->
+        <a href="/" class="logo">SmartCampus</a>
+
+        <!-- Navigation Menu -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="enrolledCourses.html">Enrolled Courses</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <!-- Sign-In/Register Buttons -->
+        <div class="auth-buttons">
+          <button class="sign-in">
+              <a href="signIn.html" class="signIn">Sign In</a>
+          </button>
+          <button class="register">
+              <a href="register.html" class="Register">Register</a>
+          </button>
+      </div>
+      
+      <div class="user-profile" style="display: none;">
+        <button class="profile-button" onclick="toggleUserProfile()">Profile</button> <!-- Profile Button -->
+        <div id="profile-details" style="display: none;" class="profile-details"> <!-- Profile Details -->
+            <div class="profile-info">
+                <img id="user-image" src="./img/profile.png" alt="User Image" class="profile-image" onclick="document.getElementById('image-input').click();"> <!-- Default image -->
+                <div class="user-details">
+                    <span id="user-name" class="profile-name"></span>
+                    <span class="profile-email" id="user-email"></span> 
+                </div>
+            </div>
+            <input type="file" id="image-input" accept="image/*" style="display: none;" onchange="changeProfileImage(event)"> <!-- Hidden file input -->
+            <button class="logout-button" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+        <!-- Hamburger Icon (Mobile) -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span class="material-icons">menu</span>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="enrolledCourses.html">Enrolled Courses</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <!-- Background Video/Image -->
+    <div class="hero-background">
+      <video autoplay muted loop id="hero-video">
+        <source src="./icons/hero.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+      <img src="./icons/hero.jpg" alt="Hero Background" class="hero-bg-image">
+    </div>
+  
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1 class="hero-heading">Empowering Education with Innovative Online Learning</h1>
+      <div class="cta-buttons">
+        <button class="cta-primary">Start Learning Today</button>
+        <button class="cta-secondary">Learn More</button>
+      </div>
+      
+      <!-- Social Proof Banner -->
+      <div class="social-proof">
+        <div class="testimonial-slider">
+          <div class="testimonial">
+            <p>"SmartCampus changed my career path!"</p>
+            <span>- Alex, Student</span>
+          </div>
+          <div class="testimonial">
+            <p>"Best online learning platform, hands down!"</p>
+            <span>- Sara, Graduate</span>
+          </div>
+          <div class="testimonial">
+            <p>"The courses are so engaging, and the community is amazing!"</p>
+            <span>- John, Professional</span>
+          </div>
+        </div>
+        <p>Join 10,000+ Students</p>
+      </div>
+    </div>
+</section>
+  
+<!-- Features & Benefits Section -->
+<section class="features">
+    <h2 class="features-heading">Why Choose SmartCampus?</h2>
+    <div class="features-container">
+      <div class="feature-item">
+        <img src="./img/gamification.jpg" alt="Gamification Icon" class="feature-icon">
+        <h3 class="feature-title">Gamification for Engagement</h3>
+        <p class="feature-description">Boost your learning through interactive challenges and rewards.</p>
+      </div>
+      <div class="feature-item">
+        <img src="./img/VR_Tours.jpeg" alt="VR Tours Icon" class="feature-icon">
+        <h3 class="feature-title">Virtual Campus Tours</h3>
+        <p class="feature-description">Explore our campus virtually with immersive VR experiences.</p>
+      </div>
+      <div class="feature-item">
+        <img src="./img/PersonalizedCourses.jpg" alt="Personalized Courses Icon" class="feature-icon">
+        <h3 class="feature-title">Personalized Course Recommendations</h3>
+        <p class="feature-description">Get course suggestions based on your preferences and goals.</p>
+      </div>
+      <div class="feature-item">
+        <img src="./img/ProgressTracking.jpeg" alt="Progress Tracking Icon" class="feature-icon">
+        <h3 class="feature-title">Real-time Learning Progress</h3>
+        <p class="feature-description">Track your progress and stay motivated with real-time updates.</p>
+      </div>
+    </div>
+    <div class="cta-container">
+      <button class="cta-primary">Get Started</button>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section class="about-us" id="about">
+    <h2 class="about-us-heading">About SmartCampus</h2>
+    <p class="mission-statement">
+      SmartCampus is committed to transforming online education through innovative learning solutions. Our mission is to empower students worldwide with personalized learning experiences, interactive tools, and continuous support to help them achieve their educational goals.
+    </p>
+    <div class="vision-goals">
+      <h3 class="vision-heading">Our Vision & Goals</h3>
+      <ul class="goals-list">
+        <li>
+          <img src="./img/accessibleEducation.jpeg" alt="Icon 1" class="goal-icon">
+          <span>Provide accessible education globally</span>
+        </li>
+        <li>
+          <img src="./img/communityOfLifelong.jpeg" alt="Icon 2" class="goal-icon">
+          <span>Foster a community of lifelong learners</span>
+        </li>
+        <li>
+          <img src="./img/cutting-edgeTechnologies.jpeg" alt="Icon 3" class="goal-icon">
+          <span>Innovate with cutting-edge technologies</span>
+        </li>
+      </ul>
+    </div>
+    <div class="cta-container">
+      <button class="cta-primary">Join Us</button>
+    </div>
+</section>
+  
+<!-- Student Testimonials Section -->
+<section class="testimonials-section">
+    <h2 class="testimonials-heading">Success Stories</h2>
+    <div class="testimonials-carousel">
+      <div class="testimonial-card">
+        <img src="./icons/student1.jpeg" alt="Student Photo" class="testimonial-photo">
+        <div class="testimonial-content">
+          <p class="testimonial-quote">"SmartCampus transformed my career! The courses were easy to follow, and the support was excellent."</p>
+          <div class="testimonial-info">
+            <h4 class="student-name">Shekh Faisal</h4>
+            <div class="star-rating">
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9734;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <img src="./icons/student2.jpg" alt="Student Photo" class="testimonial-photo">
+        <div class="testimonial-content">
+          <p class="testimonial-quote">"I loved the interactive features and personalized recommendations. Best learning platform!"</p>
+          <div class="testimonial-info">
+            <h4 class="student-name">Naruto</h4>
+            <div class="star-rating">
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-container">
+      <button class="cta-primary join-community">Join the Community</button>
+    </div>
+</section>
+  
+<!-- Social Proof Section -->
+<section class="social-proof-section">
+    <h2 class="social-proof-heading">Join the Community of 50,000+ Learners</h2>
+    <div class="social-media-links">
+      <a href="https://www.instagram.com/_shaikh__sahab_19_8?igsh=N3M5a3FvZGxpN290" class="social-icon" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/faisal-shaikh-3064582a4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-icon" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://github.com/shekhfaisal2110" class="social-icon" target="_blank" aria-label="Twitter">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="reviews-carousel">
+      <div class="review-card">
+        <p class="review-text">"SmartCampus has changed the way I learn. The courses are well-structured and the instructors are highly supportive."</p>
+        <div class="review-info">
+          <h4 class="user-name">Vyom</h4>
+          <div class="star-rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9734;</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"Fantastic platform with real-world skills. I've landed a new job thanks to the training I received here."</p>
+        <div class="review-info">
+          <h4 class="user-name">Zibran</h4>
+          <div class="star-rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+  
+<!-- Blog Section -->
+  <h2 class="blog-heading">Learn from Our Blog</h2>
+  <section class="blog-section" id="blog">
+    <div class="categories-filter">
+      <label for="category-select">Filter by Category:</label>
+      <select id="category-select" class="category-select">
+        <option value="all">All</option>
+        <option value="learning-tips">Learning Tips</option>
+        <option value="industry-news">Industry News</option>
+      </select>
+    </div>
+    
+    <div class="articles-grid">
+      <div class="article-card" data-category="learning-tips">
+        <img src="./img/LearningEfficiency.jpeg" alt="Blog Post 1" class="article-image">
+        <h3 class="article-title">How to Improve Your Learning Efficiency</h3>
+        <p class="article-description">Discover practical tips for boosting your study habits and improving focus.</p>
+      </div>
+      <div class="article-card" data-category="industry-news">
+        <img src="./img/OnlineLearning.jpg" alt="Blog Post 2" class="article-image">
+        <h3 class="article-title">The Future of Online Learning</h3>
+        <p class="article-description">Explore the latest trends and innovations shaping the future of online education.</p>
+      </div>
+      <div class="article-card" data-category="career-advice">
+        <img src="./img/CareerAdvancement.jpeg" alt="Blog Post 6" class="article-image">
+        <h3 class="article-title">Top Online Courses for Career Advancement</h3>
+        <p class="article-description">Explore the best online courses that can help boost your career prospects and skills.</p>
+      </div>
+    </div>
+    <div class="cta-container">
+      <a href="blog.html" class="cta-button">Read Our Latest Articles</a>
+    </div>
+</section>
+
+
+<section class="cta-section">
+  <h2 class="cta-heading">Ready to Start Your Learning Journey?</h2>
+  <a href="#" class="cta-button" onclick="handleCTAClick()">Sign Up Today</a> <!-- Updated to call a function -->
+  <p class="cta-highlight">Get Instant Access to 100+ Courses</p>
+</section>
+  
+<!-- Contact Us Section -->
+<section class="contact-us-section" id="contact">
+    <h2 class="contact-heading">Contact SmartCampus</h2>
+    <div class="contact-container">
+      <form class="contact-form">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" id="name" name="name" class="form-input" required>
+  
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" class="form-input" required>
+  
+        <label for="subject" class="form-label">Subject</label>
+        <input type="text" id="subject" name="subject" class="form-input" required>
+  
+        <label for="message" class="form-label">Message</label>
+        <textarea id="message" name="message" class="form-input" rows="4" required></textarea>
+  
+        <button type="submit" class="submit-button">Submit Inquiry</button>
+      </form>
+  
+      <div class="contact-location">
+        <h3>Our Location</h3>
+        <p>Sardar Vallabhbhai Global University, Chimanbhai Patel Institute Campus, Sarkhej - Gandhinagar Hwy, near Prahlad Nagar, Prahlad Nagar, Ahmedabad, Gujarat 380015</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.1857843451!2d72.5028155753219!3d23.016949816538055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848ac8a7faf3%3A0xc49f901866d2abd5!2sShri%20Chimanbhai%20Patel%20Institute%20of%20Management%20%26%20Research!5e0!3m2!1sen!2sin!4v1738463101732!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+</section>
+  
+<!-- FAQs Section -->
+<section class="faqs-section">
+    <h2 class="faqs-heading">Frequently Asked Questions</h2>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          How do I enroll in a course?
+        </button>
+        <div class="accordion-content">
+          <p>You can enroll in any course by clicking the 'Enroll Now' button on the course page. Then, follow the checkout process to complete your registration.</p>
+        </div>
+      </div>
+  
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          What are the payment options?
+        </button>
+        <div class="accordion-content">
+          <p>We accept payments via credit card, PayPal, and other secure payment gateways. You can choose the option that suits you best during checkout.</p>
+        </div>
+      </div>
+  
+      <div class="accordion-item">
+        <button class="accordion-button" aria-expanded="false">
+          How can I get my certificate?
+        </button>
+        <div class="accordion-content">
+          <p>Once you complete a course, your certificate will be available in your profile under 'My Courses'. You can download it anytime from there.</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="cta-buttons">
+      <button class="cta-button">Contact Support</button>
+      <button class="cta-button">Learn More</button>
+    </div>
+</section>
+  
+<!-- Newsletter Sign-Up Section -->
+<section class="newsletter-section">
+    <h2 class="newsletter-heading">Stay Updated</h2>
+    <p class="newsletter-description">Sign up for our newsletter to get the latest course updates.</p>
+    <form class="newsletter-form" action="#" method="POST">
+      <input type="email" name="email" placeholder="Enter your email address" class="newsletter-input" required>
+      <button type="submit" class="newsletter-button">Subscribe Now</button>
+    </form>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <ul>
+          <div class="social-media-links">
+            <a href="https://www.instagram.com/_shaikh__sahab_19_8?igsh=N3M5a3FvZGxpN290" class="social-icon" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/faisal-shaikh-3064582a4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-icon" target="_blank" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/shekhfaisal2110" class="social-icon" target="_blank" aria-label="Twitter">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </ul>
+      </div>
+  
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="fas fa-phone-alt"></i> 079 2692 6568</li>
+          <li><i class="fas fa-envelope"></i> support@smartcampus.com</li>
+          <li><i class="fas fa-map-marker-alt"></i> 2110 Smart Campus St, Ahmedabad, India</li>
+        </ul>
+      </div>
+  
+      <div class="footer-security">
+        <h3>Secure Payment</h3>
+        <ul>
+          <li><img src="./icons/ssl.png" alt="SSL Secure" class="security-icon"></li>
+          <li><img src="./icons/gateway.png" alt="Payment Gateway" class="security-icon"></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>&copy; 2024 SmartCampus. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="./js/script.js"></script>
+
+</body>
+</html>

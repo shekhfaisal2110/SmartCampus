@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCampus-Enrolled Courses</title>
+    
+    <link rel="stylesheet" href="./css/courser.css">
+    <link rel="stylesheet" href="./css/respons.css">
+    <link rel="shortcut icon" href="./icons/logo.jpg" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        .enrolled-heading {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+
+        .course-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .course-list li {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .course-list li:hover {
+            background-color: #e9ecef;
+            transform: scale(1.05);
+        }
+
+        .course-list li a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .course-list li a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .cta-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .cta-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .back-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="enrolled-heading">Enrolled Courses</h2>
+    
+    <ul id="courseList" class="course-list">
+        <!-- List of enrolled courses will be inserted here by JavaScript -->
+    </ul>
+    
+    <button class="back-button" onclick="goBack()">Back</button> 
+
+    <script>
+        const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+
+        function showEnrolledCourses() {
+            const courseList = document.getElementById("courseList");
+            courseList.innerHTML = ""; // Clear previous list
+
+            if (enrolledCourses.length === 0) {
+                courseList.innerHTML = "<li>No courses enrolled yet.</li>";
+            } else {
+                enrolledCourses.forEach(course => {
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = `<a href="certificate.html?course=${encodeURIComponent(course)}">${course}</a>`;
+                    courseList.appendChild(listItem);
+                });
+            }
+        }
+
+        function goBack() {
+            window.location.href = "courses.html"; 
+        }
+
+        // Automatically show enrolled courses when the page loads
+        showEnrolledCourses();
+    </script>
+</body>
+</html>

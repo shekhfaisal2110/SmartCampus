@@ -1,0 +1,86 @@
+/* User Profile Styles */
+.user-profile {
+    position: relative; /* Position relative for absolute positioning of profile details */
+}
+
+.profile-button {
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    border-radius: 5px;
+    padding: 10px 15px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+.profile-button:hover {
+    background-color: #0056b3; 
+}
+
+/* Profile Details Styles */
+.profile-details {
+    position: absolute; 
+    top: 60px; 
+    right: 0; 
+    background-color: white;
+    border-radius: 8px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    padding: 15px; 
+    z-index: 100; 
+    width: 250px; 
+    max-height: 300px; 
+    overflow-y: auto; 
+}
+
+/* Profile Info Styles */
+.profile-info {
+    display: flex; 
+    align-items: center;
+    margin-bottom: 10px; 
+}
+
+/* Profile Image Styles */
+.profile-image {
+    width: 60px;
+    height: 60px; 
+    border-radius: 50%; 
+    margin-right: 15px; 
+    border: 2px solid #007bff; 
+}
+
+/* User Details Styles */
+.user-details {
+    display: flex;
+    flex-direction: column; 
+}
+
+/* Profile Name Styles */
+.profile-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; 
+}
+
+/* Profile Email Styles */
+.profile-email {
+    font-size: 14px; 
+    color: #666; 
+}
+
+/* Logout Button Styles */
+.logout-button {
+    background-color: #dc3545; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+.logout-button:hover {
+    background-color: #c82333; 
+    transform: scale(1.05); 
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCampus-Certificate</title>
+    <link rel="shortcut icon" href="./icons/logo.jpg" type="image/x-icon">
+    <style>
+        body {
+            text-align: center;
+            margin: 50px;
+            font-family: Arial, sans-serif;
+        }
+        .certificate-container {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .course-image {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .completion-message {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        /* Back Button Styles */
+        .back-button {
+          background-color: #007bff;
+          color: white; 
+          border: none;
+          border-radius: 5px;
+          padding: 10px 15px;
+          font-size: 16px; 
+          cursor: pointer; 
+          width: 20vw;
+          transition: background-color 0.3s ease, transform 0.2s ease; 
+          display: block; 
+          margin: 20px auto; 
+        }
+
+        .back-button:hover {
+          background-color: #0056b3; 
+          transform: scale(1.05); 
+        }
+
+        .back-button:focus {
+          outline: none; 
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+        }
+
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <h2>Your Certificate</h2>
+        <img id="courseImage" class="course-image" src="" alt="Course Image">
+        <p id="courseTitle" class="course-title"></p>
+        <p id="completionMessage" class="completion-message"></p>
+    </div>
+
+    <button class="back-button" onclick="goBack()">Back</button>
+
+    <script>
+        // Get the course name from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseName = urlParams.get('course');
+
+        if (!courseName) {
+            alert("Course name is missing in the URL.");
+            window.location.href = "index.html"; // Redirect if course name is missing
+        }
+
+        // Assume total tasks are 5 for this example
+        const totalTasks = 5; 
+        const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || []; // Retrieve enrolled courses from local storage
+        const completedTasks = enrolledCourses.length; // Number of enrolled courses
+
+        // Calculate completion percentage
+        const completionPercentage = (completedTasks / totalTasks) * 100;
+
+        // Set course image based on course name
+        const courseImage = document.getElementById("courseImage");
+        const imagePath = `./img/${courseName.replace(/ /g,'')}.jpg`; // Assuming image names match course names without spaces
+
+        // Check if the image exists, if not, display a default image
+        const img = new Image();
+        img.onload = function() {
+            courseImage.src = imagePath;
+        };
+        img.onerror = function() {
+            courseImage.src = './img/default-course-image.jpg'; // Default image if not found
+        };
+        img.src = imagePath;
+
+        // Display course title
+        document.getElementById("courseTitle").textContent = courseName;
+
+        // Display the appropriate message
+        const completionMessage = document.getElementById("completionMessage");
+        if (completionPercentage >= 75) {
+            completionMessage.innerHTML = `Congratulations! You have completed the course: <strong>${courseName}</strong> and earned your certificate!`;
+        } else {
+            completionMessage.innerHTML = `You have completed the course: <strong>${courseName}</strong>. Your completion percentage is <strong>${completionPercentage.toFixed(2)}%</strong>. Keep going to earn your certificate!`;
+        }
+
+        function goBack() {
+            window.location.href = "enrolledCourses.html";
+        }
+    </script>
+</body>
+</html>
